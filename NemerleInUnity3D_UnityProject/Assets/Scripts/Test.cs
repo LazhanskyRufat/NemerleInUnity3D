@@ -7,16 +7,13 @@ using UnityEngine;
 
 using UniRx;
 
+using NemerleCore.UI;
+
 
 namespace NemerleInUnity
 {
-    public class Test : MonoBehaviour
+    public class Test : CombinedUI
     {
-        private void Awake()
-        {
-        
-        }
-
         private void Start()
         {
         
