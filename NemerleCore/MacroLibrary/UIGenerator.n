@@ -1,0 +1,77 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Compiler;
+using Nemerle.Compiler.Parsetree;
+using Nemerle.Compiler.Typedtree;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using UnityEngine;
+using UnityEngine.UI;
+
+
+namespace MacroLibrary
+{
+    [Nemerle.MacroUsage(Nemerle.MacroPhase.BeforeTypedMembers, Nemerle.MacroTargets.Class)]
+    macro CombinedGenerator(typeBuilder : TypeBuilder, params expressions : list[PExpr]) 
+    {
+        foreach(expression in expressions) 
+        {
+            match(expression)
+            {
+                | <[$(identifier : name) : $type]> =>
+                {
+                    match(type)
+                    {
+                        | <[Button]> | <[Text]> | <[Toggle]> =>
+                        {
+                            def name = identifier.ToString();
+                            def firstChar = Char.ToLower(name[0]).ToString();
+                            def fieldName = "_" + name.Remove(0, 1).Insert(0, firstChar) + type.ToString();
+                                    
+                            typeBuilder.Define(<[ decl:
+                                [Accessor]
+                                [SerializeField]
+                                private mutable $(fieldName : usesite) : $type;
+                            ]>);
+                            
+                            match(type)
+                            {
+                                | <[Button]> =>
+                                {
+                                    def initializerName = "Init" + name + "ButtonHandler";
+                                    
+                                    typeBuilder.Define(<[ decl:
+                                        private $(initializerName : usesite)(clickHandler : void -> void, onException : Exception -> void) : void
+                                        {
+                                            try
+                                            {
+                                                match(this.$(fieldName : usesite) != null)
+                                                {
+                                                    | true => this.$(fieldName : usesite).onClick.AddListener(clickHandler);
+                                                    | _ => onException(Exception("Object reference is missing: " + $fieldName));
+                                                }
+                                            }
+                                            catch
+                                            {
+                                                | exception => onException(exception);
+                                            }
+                                        }
+                                    ]>);
+                                }
+                                | _ => {};
+                            }
+                        }
+                        | _ => Message.Error(expression.Location, "Unsupported type: " + type.ToString());
+                    }
+                }
+                | other => 
+                    Message.Error(expression.Location, "Unsupported expression: " + other.ToString() + " Format must be [identifier : type]");
+            }
+        }
+    }
+}

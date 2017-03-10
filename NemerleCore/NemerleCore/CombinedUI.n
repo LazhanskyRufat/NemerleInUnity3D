@@ -1,0 +1,35 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using UnityEngine;
+using UnityEngine.UI;
+
+using MacroLibrary;
+
+
+namespace NemerleCore.UI
+{
+    /// <summary>
+    /// Description of CombinedUI.
+    /// </summary>
+    [CombinedGenerator(New : Text, Back : Button, Plus : Button, Anim : Button)]
+    public class CombinedUI : MonoBehaviour
+    {
+        private Awake() : void
+        {
+            InitBackButtonHandler(OnBackClick, Debug.LogException);
+            InitAnimButtonHandler(() => Debug.LogError("Anim"), Debug.LogException);
+        }
+        
+        private OnBackClick() : void
+        {
+            Debug.LogError("Back");
+        }
+    }
+}

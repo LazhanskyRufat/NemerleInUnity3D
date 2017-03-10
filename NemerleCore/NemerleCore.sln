@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "NemerleCore", "NemerleCore\NemerleCore.nproj", "{1C3811BB-9B09-4710-881E-22B47C43D9C0}"
+EndProject
+Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "MacroLibrary", "MacroLibrary\MacroLibrary.nproj", "{7178031F-1980-4C9A-8528-490D073B190F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C3811BB-9B09-4710-881E-22B47C43D9C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3811BB-9B09-4710-881E-22B47C43D9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3811BB-9B09-4710-881E-22B47C43D9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3811BB-9B09-4710-881E-22B47C43D9C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7178031F-1980-4C9A-8528-490D073B190F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7178031F-1980-4C9A-8528-490D073B190F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7178031F-1980-4C9A-8528-490D073B190F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7178031F-1980-4C9A-8528-490D073B190F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
